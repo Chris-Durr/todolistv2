@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -25,7 +25,7 @@ function Todo({ todo, index, markTodo, removeTodo }) {
 }
 
 function FormTodo({ addTodo }) {
-	const [value, setValue] = React.useState("");
+	const [value, setValue] = useState("");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -37,31 +37,24 @@ function FormTodo({ addTodo }) {
 	return (
 		<Form onSubmit={handleSubmit}>
 			<Form.Group>
-				<Form.Label>
-					<b>Add Todo</b>
-				</Form.Label>
+				<Form.Label>Add something to do!</Form.Label>
 				<Form.Control
 					type="text"
 					className="input"
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
-					placeholder="Add new todo"
+					placeholder="What do you wanna do?"
 				/>
 			</Form.Group>
-			<Button variant="primary mb-3" type="submit">
-				Submit
+			<Button id="sendbutton" variant="primary mb-3" type="submit">
+				Add to the list
 			</Button>
 		</Form>
 	);
 }
 
 function App() {
-	const [todos, setTodos] = React.useState([
-		{
-			text: "This is a sampe todo",
-			isDone: false,
-		},
-	]);
+	const [todos, setTodos] = useState([]);
 
 	const addTodo = (text) => {
 		const newTodos = [...todos, { text }];
