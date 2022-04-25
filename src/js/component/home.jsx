@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function Todo({ todo, index, markTodo, removeTodo }) {
+function Todo({ valorTodo, index, checkTodo, removeTodo }) {
 	return (
 		<div className="todo">
-			<span style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
-				{todo.text}
+			<span
+				style={{
+					textDecoration: valorTodo.isDone ? "line-through" : "",
+				}}>
+				{valorTodo.text}
 			</span>
 			<div>
 				<Button
 					variant="outline-success"
-					onClick={() => markTodo(index)}>
+					onClick={() => checkTodo(index)}>
 					✓
 				</Button>{" "}
 				<Button
@@ -35,7 +38,7 @@ function FormTodo({ addTodo }) {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form className="text-center" id="form" onSubmit={handleSubmit}>
 			<Form.Group>
 				<Form.Label>Add something to do!</Form.Label>
 				<Form.Control
@@ -54,39 +57,39 @@ function FormTodo({ addTodo }) {
 }
 
 function App() {
-	const [todos, setTodos] = useState([]);
+	const [lista, setlista] = useState([]);
 
 	const addTodo = (text) => {
-		const newTodos = [...todos, { text }];
-		setTodos(newTodos);
+		const nuevalista = [...lista, { text }];
+		setlista(nuevalista);
 	};
 
-	const markTodo = (index) => {
-		const newTodos = [...todos];
-		newTodos[index].isDone = true;
-		setTodos(newTodos);
+	const checkTodo = (index) => {
+		const nuevalista = [...lista];
+		nuevalista[index].isDone = true;
+		setlista(nuevalista);
 	};
 
 	const removeTodo = (index) => {
-		const newTodos = [...todos];
-		newTodos.splice(index, 1);
-		setTodos(newTodos);
+		const nuevalista = [...lista];
+		nuevalista.splice(index, 1);
+		setlista(nuevalista);
 	};
 
 	return (
 		<div className="app">
 			<div className="container">
-				<h1 className="text-center mb-4">Todo List</h1>
+				<h1 className="text-center mb-4">To-do List</h1>
 				<FormTodo addTodo={addTodo} />
 				<div>
-					{todos.map((todo, index) => (
-						<Card>
+					{lista.map((valorTodo, index) => (
+						<Card className="text-center" id="card">
 							<Card.Body>
 								<Todo
 									key={index}
 									index={index}
-									todo={todo}
-									markTodo={markTodo}
+									valorTodo={valorTodo}
+									checkTodo={checkTodo}
 									removeTodo={removeTodo}
 								/>
 							</Card.Body>
