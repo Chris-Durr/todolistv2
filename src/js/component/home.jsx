@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function Todo({ valorTodo, index, checkTodo, removeTodo }) {
+function Todo({ valorTodo, index, completado, borrar }) {
 	return (
 		<div className="todo">
 			<span
@@ -14,12 +14,10 @@ function Todo({ valorTodo, index, checkTodo, removeTodo }) {
 			<div>
 				<Button
 					variant="outline-success"
-					onClick={() => checkTodo(index)}>
+					onClick={() => completado(index)}>
 					✓
 				</Button>{" "}
-				<Button
-					variant="outline-danger"
-					onClick={() => removeTodo(index)}>
+				<Button variant="outline-danger" onClick={() => borrar(index)}>
 					✕
 				</Button>
 			</div>
@@ -64,13 +62,13 @@ function App() {
 		setlista(nuevalista);
 	};
 
-	const checkTodo = (index) => {
+	const completado = (index) => {
 		const nuevalista = [...lista];
 		nuevalista[index].isDone = true;
 		setlista(nuevalista);
 	};
 
-	const removeTodo = (index) => {
+	const borrar = (index) => {
 		const nuevalista = [...lista];
 		nuevalista.splice(index, 1);
 		setlista(nuevalista);
@@ -89,8 +87,8 @@ function App() {
 									key={index}
 									index={index}
 									valorTodo={valorTodo}
-									checkTodo={checkTodo}
-									removeTodo={removeTodo}
+									completado={completado}
+									borrar={borrar}
 								/>
 							</Card.Body>
 						</Card>
