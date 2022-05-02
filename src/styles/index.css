@@ -1,9 +1,7 @@
-#sendbutton{
-    margin-top: 10px;
+.ToDoApp{
+    margin-top: 5%;
 }
-#form{
-    width: 400px;
-}
-#card{
-    width: 400px;
+#uladd{
+    margin-top: 1px;
+    text-align: left;
 }
